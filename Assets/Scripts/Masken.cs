@@ -12,8 +12,13 @@ public class Masken : MonoBehaviour {
 	public Transform topWall;
 	public Transform bottonWall;
 
+	public KeyCode rightKey; 
+	public KeyCode leftKey; 
+	public KeyCode upKey; 
+	public KeyCode downKey; 
+
 	private float speed = 0.1f;
-	Vector2 vector = Vector2.up;
+	Vector2 vector = Vector2.zero;
 	Vector2 moveVector;
 
 	List<Transform> tail = new List<Transform>();
@@ -31,19 +36,19 @@ public class Masken : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey (KeyCode.RightArrow) && horizontal) {
+		if (Input.GetKey (rightKey) && horizontal) {
 			horizontal = false;
 			vertical = true;
 			vector = Vector2.right;
-		} else if (Input.GetKey (KeyCode.UpArrow) && vertical) {
+		} else if (Input.GetKey (upKey) && vertical) {
 			horizontal = true;
 			vertical = false;
 			vector = Vector2.up;
-		} else if (Input.GetKey (KeyCode.DownArrow) && vertical) {
+		} else if (Input.GetKey (downKey) && vertical) {
 			horizontal = true;
 			vertical = false;
 			vector = -Vector2.up;
-		} else if (Input.GetKey (KeyCode.LeftArrow) && horizontal) {
+		} else if (Input.GetKey (leftKey) && horizontal) {
 			horizontal = false;
 			vertical = true;
 			vector = -Vector2.right;
