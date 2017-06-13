@@ -31,7 +31,7 @@ public class Masken : MonoBehaviour {
 		InvokeRepeating("Movement", 0.3f, speed);
 	}
 
-	bool vertical = false;
+	bool vertical = true;
 	bool horizontal = true;
 	
 	// Update is called once per frame
