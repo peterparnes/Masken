@@ -62,7 +62,7 @@ public class Masken : MonoBehaviour {
 			}
 			GameObject g =(GameObject)Instantiate(tailPrefab, ta, Quaternion.identity);
 			tail.Insert(0, g.transform);
-			Debug.Log(speed);
+			// Debug.Log(speed);
 			eat = false;
 		}
 		else if (tail.Count > 0) {
@@ -74,9 +74,6 @@ public class Masken : MonoBehaviour {
 	}
 		
 	void OnTriggerEnter2D(Collider2D c) {
-		Debug.Log ("collider");
-		Debug.Log (c.name);
-
 		if (c.name.StartsWith ("Food")) {
 			eat = true;
 			Destroy (c.gameObject);
