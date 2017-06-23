@@ -7,7 +7,11 @@ public class Masken : MonoBehaviour {
 
 	public GameObject tailPrefab; 
 
-	private float speed = 0.1f;
+	public float MinimumDelayTime = 0.002f; 
+	public float DelayDecreaseTime = 0.005f;
+	public float InitialDelayTime = 0.1f;
+
+	private float speed ;
 	Vector2 moveVector;
 
 	List<Transform> tail = new List<Transform>();
@@ -20,11 +24,10 @@ public class Masken : MonoBehaviour {
 	void Start () {
 		foodScript = GetComponent<Food> ();
 
+		speed = InitialDelayTime;
 		InvokeRepeating("Movement", 0.3f, speed);
 	}
-
-
-	
+		
 	// Update is called once per frame
 	void Update () {
 		
@@ -37,12 +40,10 @@ public class Masken : MonoBehaviour {
 	void Movement() {
 		Vector2 ta = transform.position;
 		if (eat) {
-			if (speed > 0.002){
-				speed = speed - 0.002f;
-			}
+			IncreaseSpeed ();
+
 			GameObject g =(GameObject)Instantiate(tailPrefab, ta, Quaternion.identity);
 			tail.Insert(0, g.transform);
-			// Debug.Log(speed);
 			eat = false;
 		}
 		else if (tail.Count > 0) {
@@ -65,5 +66,19 @@ public class Masken : MonoBehaviour {
 		} else { // Game Over 
 			Time.timeScale=0;
 		}
+	}
+
+	void IncreaseSpeed() {
+		// speed += 0.002f;
+
+		if (speed > MinimumDelayTime){
+			speed = speed - DelayDecreaseTime;
+
+			Debug.Log(speed);
+
+		}
+		CancelInvoke ();
+
+		InvokeRepeating("Movement", speed, speed);
 	}
 }
