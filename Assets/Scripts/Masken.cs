@@ -5,12 +5,7 @@ using UnityEngine;
 
 public class Masken : MonoBehaviour {
 
-	public GameObject foodPrefab;
 	public GameObject tailPrefab; 
-	public Transform rightWall;
-	public Transform leftWall;
-	public Transform topWall;
-	public Transform bottonWall;
 
 	public KeyCode rightKey; 
 	public KeyCode leftKey; 
@@ -25,9 +20,12 @@ public class Masken : MonoBehaviour {
 
 	bool eat = false;
 
+	Food foodScript; 
+
 	// Use this for initialization
 	void Start () {
-		SpawnFood();
+		foodScript = GetComponent<Food> ();
+
 		InvokeRepeating("Movement", 0.3f, speed);
 	}
 
@@ -74,14 +72,7 @@ public class Masken : MonoBehaviour {
 		}
 		transform.Translate(moveVector);
 	}
-
-	public void SpawnFood() {
-		int x = (int)Random.Range (leftWall.position.x, rightWall.position.x);
-		int y = (int)Random.Range (bottonWall.position.y, topWall.position.y);
-
-		Instantiate (foodPrefab, new Vector2 (x, y), Quaternion.identity);
-	}
-
+		
 	void OnTriggerEnter2D(Collider2D c) {
 		Debug.Log ("collider");
 		Debug.Log (c.name);
@@ -89,7 +80,11 @@ public class Masken : MonoBehaviour {
 		if (c.name.StartsWith ("Food")) {
 			eat = true;
 			Destroy (c.gameObject);
-			SpawnFood ();
+
+			if (foodScript) {
+				foodScript.SpawnFood ();
+			}
+
 		} else { // Game Over 
 			Time.timeScale=0;
 		}
