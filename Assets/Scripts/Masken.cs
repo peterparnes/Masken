@@ -8,7 +8,7 @@ public class Masken : MonoBehaviour {
 	public GameObject tailPrefab; 
 
 	public float MinimumDelayTime = 0.002f; 
-	public float DelayDecreaseTime = 0.005f;
+	public float DelayDecreaseTime = 0.002f;
 	public float InitialDelayTime = 0.1f;
 
 	private float speed ;
@@ -74,7 +74,7 @@ public class Masken : MonoBehaviour {
 		if (speed > MinimumDelayTime){
 			speed = speed - DelayDecreaseTime;
 
-			Debug.Log(speed);
+			// Debug.Log(speed);
 
 		}
 		CancelInvoke ();
