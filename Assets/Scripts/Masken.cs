@@ -18,11 +18,14 @@ public class Masken : MonoBehaviour {
 
 	bool eat = false;
 
-	Food foodScript; 
+	Food food; 
+	Score score;
 
 	// Use this for initialization
 	void Start () {
-		foodScript = GetComponent<Food> ();
+		food = GetComponent<Food> ();
+		score = GetComponent<Score> ();
+		score.Reset ();
 
 		speed = InitialDelayTime;
 		InvokeRepeating("Movement", 0.3f, speed);
@@ -41,6 +44,7 @@ public class Masken : MonoBehaviour {
 		Vector2 ta = transform.position;
 		if (eat) {
 			IncreaseSpeed ();
+			score.IncreaseScore ();
 
 			GameObject g =(GameObject)Instantiate(tailPrefab, ta, Quaternion.identity);
 			tail.Insert(0, g.transform);
@@ -59,8 +63,8 @@ public class Masken : MonoBehaviour {
 			eat = true;
 			Destroy (c.gameObject);
 
-			if (foodScript) {
-				foodScript.SpawnFood ();
+			if (food) {
+				food.SpawnFood ();
 			}
 
 		} else { // Game Over 
