@@ -58,19 +58,6 @@ public class Masken : MonoBehaviour {
 		transform.Translate(moveVector);
 	}
 		
-	void OnTriggerEnter2D(Collider2D c) {
-		if (c.name.StartsWith ("Food")) {
-			eat = true;
-			Destroy (c.gameObject);
-
-			if (food) {
-				food.SpawnFood ();
-			}
-
-		} else { // Game Over 
-			Time.timeScale=0;
-		}
-	}
 
 	void IncreaseSpeed() {
 		// speed += 0.002f;
@@ -85,4 +72,21 @@ public class Masken : MonoBehaviour {
 
 		InvokeRepeating("Movement", speed, speed);
 	}
+
+	void OnTriggerEnter2D(Collider2D c) {
+		// Debug.Log ("enter2d masken, " + c);
+
+		if (c.name.StartsWith ("Food")) {
+			eat = true;
+			Destroy (c.gameObject);
+
+			if (food) {
+				food.SpawnFood ();
+			}
+		} else { // Game Over 
+			Debug.Log("Game Over");
+			Time.timeScale=0;
+		}
+	}
+
 }

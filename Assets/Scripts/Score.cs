@@ -11,12 +11,11 @@ public class Score : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Reset ();		
+		Reset ();	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	public void Reset() {
@@ -34,4 +33,9 @@ public class Score : MonoBehaviour {
 		score++;
 		SetText ();
 	}
+
+	public RectTransform GetRectTransform() {
+		return scoreText.GetComponent<RectTransform>(); 
+	}
+
 }

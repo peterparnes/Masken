@@ -20,7 +20,24 @@ public class Food : MonoBehaviour {
 		int x = (int)Random.Range (leftWall.position.x, rightWall.position.x);
 		int y = (int)Random.Range (bottonWall.position.y, topWall.position.y);
 
-		Instantiate (foodPrefab, new Vector2 (x, y), Quaternion.identity);
+		GameObject food = Instantiate (foodPrefab, new Vector2 (x, y), Quaternion.identity);
+		if (CheckOverlaps (food)) {
+			Destroy (food);
+			SpawnFood ();
+		}
+	}
+		
+	bool CheckOverlaps(GameObject food) {
+		RectTransform rectTransF = food.GetComponent<RectTransform> (); 
+		RectTransform rectTransS = GetComponent<Score> ().GetRectTransform ();
+
+		// The position is offset with a half for some reason I cannot find. Just add 0.5f to x to the localposition. 
+		Rect rectF = new Rect(rectTransF.localPosition.x+0.5f, rectTransF.localPosition.y, rectTransF.rect.width, rectTransF.rect.height);
+		Rect rectS = new Rect(rectTransS.localPosition.x, rectTransS.localPosition.y, rectTransS.rect.width, rectTransS.rect.height);
+
+		bool overlaps = rectF.Overlaps(rectS);
+
+		return overlaps;
 	}
 
 }
