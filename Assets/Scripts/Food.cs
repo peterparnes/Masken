@@ -29,7 +29,12 @@ public class Food : MonoBehaviour {
 		
 	bool CheckOverlaps(GameObject food) {
 		RectTransform rectTransF = food.GetComponent<RectTransform> (); 
-		RectTransform rectTransS = GetComponent<Score> ().GetRectTransform ();
+		Score score = GetComponent<Score> (); 
+		score = null; 
+		if (!score) {
+			return false;
+		}
+		RectTransform rectTransS = score.GetRectTransform ();
 
 		// The position is offset with a half for some reason I cannot find. Just add 0.5f to x to the localposition. 
 		Rect rectF = new Rect(rectTransF.localPosition.x+0.5f, rectTransF.localPosition.y, rectTransF.rect.width, rectTransF.rect.height);

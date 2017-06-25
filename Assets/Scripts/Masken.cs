@@ -25,7 +25,9 @@ public class Masken : MonoBehaviour {
 	void Start () {
 		food = GetComponent<Food> ();
 		score = GetComponent<Score> ();
-		score.Reset ();
+		if (score) {
+			score.Reset ();
+		}
 
 		speed = InitialDelayTime;
 		InvokeRepeating("Movement", 0.3f, speed);
