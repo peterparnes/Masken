@@ -30,7 +30,6 @@ public class Food : MonoBehaviour {
 	bool CheckOverlaps(GameObject food) {
 		RectTransform rectTransF = food.GetComponent<RectTransform> (); 
 		Score score = GetComponent<Score> (); 
-		score = null; 
 		if (!score) {
 			return false;
 		}
